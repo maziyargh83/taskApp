@@ -1,3 +1,5 @@
 export const SideBar = () => {
-  return <aside></aside>;
+  return (
+    <aside className="bg-secondary border-r-tertiary border-r w-[20vw]"></aside>
+  );
 };
