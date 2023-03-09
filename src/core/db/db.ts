@@ -1,15 +1,17 @@
 import Dexie, { Table } from "dexie";
-import { Task } from "~/types";
+import { Task, List, SubCategory } from "~/types";
 
 export class TaskDB extends Dexie {
-  // 'friends' is added by dexie when declaring the stores()
-  // We just tell the typing system this is the case
   Task!: Table<Task>;
+  List!: Table<List>;
+  SubCategory!: Table<SubCategory>;
 
   constructor() {
     super("myDatabase");
     this.version(1).stores({
-      Task: "id, title, category, status", // Primary key and indexed props
+      Task: "id, title, categoryId, subCategoryId, status, createDate, isDeleted",
+      List: "id, title, emoji, createDate, isDeleted",
+      SubCategory: "id, title, ListId, createDate, isDeleted",
     });
   }
 }

@@ -1,8 +1,33 @@
+enum STATUS {
+  "PENDING",
+  "DONE",
+}
 export class Task {
   constructor(
     public id: string,
     public title: string,
-    public category: string,
-    public status: "pending" | "done"
+    public categoryId: string,
+    public subCategoryId: string,
+    public status: keyof typeof STATUS,
+    public createDate: Date,
+    public isDeleted: boolean
+  ) {}
+}
+export class List {
+  constructor(
+    public id: string,
+    public title: string,
+    public emoji: string,
+    public createDate: Date,
+    public isDeleted: boolean
+  ) {}
+}
+export class SubCategory {
+  constructor(
+    public id: string,
+    public title: string,
+    public ListId: string,
+    public createDate: Date,
+    public isDeleted: boolean
   ) {}
 }
