@@ -4,10 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "var(--color-primary)",
+        body: "var(--color-body)",
         secondary: "var(--color-secondary)",
-        ocean: "var(--color-ocean)",
-        light: "var(--color-light)",
+        tertiary: "var(--color-tertiary)",
+        primary: "var(--color-primary)",
       },
     },
   },

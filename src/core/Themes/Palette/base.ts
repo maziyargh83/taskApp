@@ -1,8 +1,8 @@
 import type { themeRecord } from "~/core/Themes/types/types";
 
 export const baseTheme: themeRecord = {
-  primary: "#61DAFB",
-  secondary: "#254E70",
-  ocean: "#00ADB5",
-  light: "#EEEEEE",
+  primary: "#4B81ED",
+  secondary: "#F9F9F9",
+  tertiary: "#5B5A5D",
+  body: "#FFFFFF",
 };
