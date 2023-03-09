@@ -3,12 +3,23 @@ import {
   createBrowserRouter,
   redirect,
 } from "react-router-dom";
+import { Layout } from "~/components";
 import { Home, NotFound } from "~/pages";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        loader: () => redirect("/inbox"),
+      },
+      {
+        element: <Home />,
+        path: "inbox",
+      },
+    ],
   },
   {
     path: "404",

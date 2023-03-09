@@ -5,4 +5,5 @@ export const baseTheme: themeRecord = {
   secondary: "#F9F9F9",
   tertiary: "#5B5A5D",
   body: "#FFFFFF",
+  light: "#434245",
 };

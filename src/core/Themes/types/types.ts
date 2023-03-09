@@ -3,6 +3,7 @@ export enum colorPropertyEnum {
   "secondary",
   "tertiary",
   "primary",
+  "light",
 }
 export type themeRecord = Record<keyof typeof colorPropertyEnum, string>;
 export enum ThemeType {

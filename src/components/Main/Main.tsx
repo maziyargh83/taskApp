@@ -1,5 +1,9 @@
-import { PropsWithChildren } from "react";
+import { Outlet } from "react-router-dom";
 
-export const Main = ({ children }: PropsWithChildren) => {
-  return <div className="bg-body min-h-screen flex-1">{children}</div>;
+export const Main = () => {
+  return (
+    <div className="bg-body min-h-screen flex-1">
+      <Outlet />
+    </div>
+  );
 };
