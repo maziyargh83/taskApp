@@ -3,3 +3,5 @@ export * from "./Main";
 export * from "./Layout";
 export * from "./DropMenu";
 export * from "./Modal";
+export * from "./Header";
+export * from "./Skelton";

@@ -9,6 +9,7 @@ module.exports = {
         tertiary: "var(--color-tertiary)",
         primary: "var(--color-primary)",
         light: "var(--color-light)",
+        reverse: "var(--color-reverse)",
       },
       backgroundColor: (theme) => ({
         ...theme("colors"),

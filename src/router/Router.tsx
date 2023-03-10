@@ -4,7 +4,7 @@ import {
   redirect,
 } from "react-router-dom";
 import { Layout } from "~/components";
-import { Home, NotFound } from "~/pages";
+import { Home, List, NotFound } from "~/pages";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         path: "inbox",
       },
       {
-        element: <Home />,
+        element: <List />,
         path: "list/:id",
       },
     ],

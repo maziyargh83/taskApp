@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { DropMenu } from "~/components/DropMenu";
-import { createList, db } from "~/core";
+import { createList, getLists } from "~/core";
 import { List as ListType } from "~/types";
 import { clsx } from "clsx";
 import { Modal } from "~/components/Modal";
@@ -11,7 +11,7 @@ export const List = () => {
   const [listData, setListData] = useState<ListType[]>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const getData = async () => {
-    const data = await db.List.toArray();
+    const data = await getLists();
     setListData(data);
   };
   const addList = async (data: Partial<ListType>) => {

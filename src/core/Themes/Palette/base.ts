@@ -6,4 +6,5 @@ export const baseTheme: themeRecord = {
   tertiary: "#5B5A5D",
   body: "#FFFFFF",
   light: "#434245",
+  reverse: "#000",
 };

@@ -6,4 +6,5 @@ export const darkTheme = extend(baseTheme, {
   secondary: "#242728",
   tertiary: "#A1A1A3",
   body: "#1F2122",
+  reverse: "#fff",
 });
