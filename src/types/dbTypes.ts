@@ -4,7 +4,7 @@ enum STATUS {
 }
 export class Task {
   constructor(
-    public id: string,
+    public objectId: string,
     public title: string,
     public categoryId: string,
     public subCategoryId: string,
@@ -15,16 +15,16 @@ export class Task {
 }
 export class List {
   constructor(
-    public id: string,
+    public objectId: string,
     public title: string,
     public emoji: string,
     public createDate: Date,
     public isDeleted: boolean
   ) {}
 }
-export class SubCategory {
+export class Label {
   constructor(
-    public id: string,
+    public objectId: string,
     public title: string,
     public ListId: string,
     public createDate: Date,

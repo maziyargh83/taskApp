@@ -1,17 +1,17 @@
 import Dexie, { Table } from "dexie";
-import { Task, List, SubCategory } from "~/types";
+import { Task, List, Label } from "~/types";
 
 export class TaskDB extends Dexie {
   Task!: Table<Task>;
   List!: Table<List>;
-  SubCategory!: Table<SubCategory>;
+  Label!: Table<Label>;
 
   constructor() {
     super("myDatabase");
     this.version(1).stores({
-      Task: "id, title, categoryId, subCategoryId, status, createDate, isDeleted",
-      List: "id, title, emoji, createDate, isDeleted",
-      SubCategory: "id, title, ListId, createDate, isDeleted",
+      Task: "objectId, title, categoryId, subCategoryId, status, createDate, isDeleted",
+      List: "objectId, title, emoji, createDate, isDeleted",
+      Label: "objectId, title, ListId, createDate, isDeleted",
     });
   }
 }
