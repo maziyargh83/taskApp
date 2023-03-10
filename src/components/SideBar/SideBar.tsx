@@ -1,7 +1,6 @@
 import { FiInbox, FiSearch, FiStar, FiTrash2 } from "react-icons/fi";
 import { MdOutlineTask } from "react-icons/md";
 import { List } from "./List";
-import { Label } from "./Label";
 export const SideBar = () => {
   return (
     <aside className="bg-secondary border-r-light border-r w-[200px] text-tertiary flex flex-col">
@@ -29,9 +28,6 @@ export const SideBar = () => {
       </div>
       <div className="px-3 pt-5">
         <List />
-        <div className="mt-5">
-          <Label />
-        </div>
       </div>
     </aside>
   );

@@ -10,6 +10,9 @@ module.exports = {
         primary: "var(--color-primary)",
         light: "var(--color-light)",
       },
+      backgroundColor: (theme) => ({
+        ...theme("colors"),
+      }),
     },
   },
   plugins: [],
