@@ -4,7 +4,7 @@ import { getTheme } from "~/core/Themes/Utils/utils";
 
 export const Layout = () => {
   return (
-    <div style={getTheme()} className="flex">
+    <div className="flex">
       <SideBar />
       <Main />
       <ToastContainer />

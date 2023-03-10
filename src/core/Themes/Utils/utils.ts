@@ -62,7 +62,7 @@ export const applyTheme = (theme: keyof typeof ThemeType): void => {
   };
   localStorage.setItem("theme", JSON.stringify(data));
 };
-const applyStyle = (themeObject: Record<string, string>) => {
+export const applyStyle = (themeObject: Record<string, string>) => {
   const root = document.documentElement;
 
   Object.keys(themeObject).forEach((property) => {
