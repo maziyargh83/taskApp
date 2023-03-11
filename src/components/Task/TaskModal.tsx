@@ -8,14 +8,17 @@ import { Status } from "~/components/Status/Status";
 import { STATUS, Task } from "~/types";
 interface TaskModalProps {
   save: (item: Partial<Task>) => void;
+  task?: Task;
 }
-export const TaskModal = ({ save }: TaskModalProps) => {
-  const [status, setStatus] = useState<keyof typeof STATUS>("PENDING");
-  const [image, setImage] = useState<ArrayBuffer | string | null | undefined>(
-    undefined
+export const TaskModal = ({ save, task }: TaskModalProps) => {
+  const [status, setStatus] = useState<keyof typeof STATUS>(
+    task?.status ?? "PENDING"
   );
-  const [favorite, setFavorite] = useState<boolean>(false);
-  const [title, setTitle] = useState<string>("");
+  const [image, setImage] = useState<ArrayBuffer | string | null | undefined>(
+    task?.image ?? undefined
+  );
+  const [favorite, setFavorite] = useState<boolean>(task?.favorite ?? false);
+  const [title, setTitle] = useState<string>(task?.title ?? "");
   const changeStatus = () => {
     if (status == "PENDING") {
       setStatus("DONE");

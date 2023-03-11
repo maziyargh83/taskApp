@@ -16,14 +16,30 @@ export const updateList = async (data: List) => {
       item.isDeleted = data.isDeleted;
     });
 };
+export const updateTask = async (data: Task) => {
+  return await db.Task.where("objectId")
+    .equals(data.objectId)
+    .modify((item) => {
+      if (!!data.status) item.status = data.status;
+      if (!!data.title) item.title = data.title;
+      if (!!data.isDeleted) item.isDeleted = data.isDeleted;
+      if (!!data.image) item.image = data.image;
+      item.favorite = data.favorite;
+    });
+};
+export const updateMany = async (data: Task[]) => {
+  await db.Task.bulkPut(data);
+};
 export const addTask = async ({
   title,
   categoryId,
   favorite,
   status,
   image,
+  order,
 }: Partial<Task>) => {
   if (!title || !categoryId || !status) return;
+  const _order = order || (await db.Task.count()) + 1;
   await db.Task.add(
     new Task(
       v4(),
@@ -33,6 +49,7 @@ export const addTask = async ({
       favorite!,
       new Date(),
       false,
+      _order ?? 0,
       image
     )
   );

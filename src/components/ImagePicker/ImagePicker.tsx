@@ -31,7 +31,9 @@ export const ImagePicker = ({ save, image }: ImagePickerProps) => {
         >
           <input {...getInputProps()} />
 
-          {!acceptedFiles[0] && <FiLink className="text-primary" size={20} />}
+          {(!acceptedFiles[0] || !image) && (
+            <FiLink className="text-primary" size={20} />
+          )}
           {(acceptedFiles[0] || image) && (
             <RenderImage imageData={image} acceptedFiles={acceptedFiles[0]} />
           )}

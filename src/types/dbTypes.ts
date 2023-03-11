@@ -11,6 +11,7 @@ export class Task {
     public favorite: boolean,
     public createDate: Date,
     public isDeleted: boolean,
+    public order: number,
     public image?: ArrayBuffer | string | null
   ) {}
 }
