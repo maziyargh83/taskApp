@@ -10,8 +10,9 @@ import { List, Task } from "~/types";
 
 interface ListHeaderProps {
   list: List;
+  view?: boolean;
 }
-export const ListHeader = ({ list }: ListHeaderProps) => {
+export const ListHeader = ({ list, view = false }: ListHeaderProps) => {
   const [openModal, setOpenModal] = useState(false);
   const [openTask, setOpenTask] = useState(false);
   const updateListData = async (data: Partial<List>) => {
@@ -53,15 +54,17 @@ export const ListHeader = ({ list }: ListHeaderProps) => {
         >
           <CreateList addList={updateListData} list={list} type="update" />
         </Modal>
-        <ContextMenu update={() => setOpenModal(true)} />
+        {!view && <ContextMenu update={() => setOpenModal(true)} />}
       </div>
-      <div
-        onClick={() => setOpenTask(true)}
-        className="flex space-x-3 items-center mt-10 cursor-pointer"
-      >
-        <span className="text-primary text-lg">+</span>
-        <p className="text-tertiary  text-base">New Task</p>
-      </div>
+      {!view && (
+        <div
+          onClick={() => setOpenTask(true)}
+          className="flex space-x-3 items-center mt-10 cursor-pointer"
+        >
+          <span className="text-primary text-lg">+</span>
+          <p className="text-tertiary  text-base">New Task</p>
+        </div>
+      )}
       <Modal
         className="bg-secondary w-[400px]"
         close={() => setOpenTask(false)}

@@ -22,7 +22,7 @@ export const updateTask = async (data: Task) => {
     .modify((item) => {
       if (!!data.status) item.status = data.status;
       if (!!data.title) item.title = data.title;
-      if (!!data.isDeleted) item.isDeleted = data.isDeleted;
+      item.isDeleted = data.isDeleted;
       if (!!data.image) item.image = data.image;
       item.favorite = data.favorite;
     });

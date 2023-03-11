@@ -4,7 +4,7 @@ import {
   redirect,
 } from "react-router-dom";
 import { Layout } from "~/components";
-import { Home, List, NotFound } from "~/pages";
+import { Favorite, Inbox, List, NotFound, Search, Trash } from "~/pages";
 
 const router = createBrowserRouter([
   {
@@ -16,12 +16,25 @@ const router = createBrowserRouter([
         loader: () => redirect("/inbox"),
       },
       {
-        element: <Home />,
+        element: <Inbox />,
         path: "inbox",
       },
       {
         element: <List />,
         path: "list/:id",
+      },
+
+      {
+        element: <Trash />,
+        path: "trash",
+      },
+      {
+        element: <Favorite />,
+        path: "favorite",
+      },
+      {
+        element: <Search />,
+        path: "search",
       },
     ],
   },

@@ -2,8 +2,9 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { FiEdit3, FiMoreHorizontal, FiTrash2 } from "react-icons/fi";
 interface ContextMenuProps {
   update: () => void;
+  deleteItem: () => void;
 }
-export const ContextMenu = ({ update }: ContextMenuProps) => {
+export const ContextMenu = ({ update, deleteItem }: ContextMenuProps) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -24,7 +25,10 @@ export const ContextMenu = ({ update }: ContextMenuProps) => {
             <FiEdit3 className="text-primary" />
             <span className="text-primary">Edit</span>
           </DropdownMenu.Item>
-          <DropdownMenu.Item className="space-x-3 text-sm leading-none text-reverse rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-reverse data-[disabled]:pointer-events-none  data-[highlighted]:text-reverse">
+          <DropdownMenu.Item
+            onClick={deleteItem}
+            className="space-x-3 text-sm leading-none text-reverse rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-reverse data-[disabled]:pointer-events-none  data-[highlighted]:text-reverse"
+          >
             <FiTrash2 className="text-red-400" />
             <span className="text-red-400">Delete</span>
           </DropdownMenu.Item>

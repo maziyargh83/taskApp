@@ -1,5 +1,4 @@
 import { useLiveQuery } from "dexie-react-hooks";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   ListHeader,
@@ -9,7 +8,6 @@ import {
 } from "~/components";
 import { RenderTask } from "~/components/Task/RenderTask";
 import { db } from "~/core";
-import { List as ListType } from "~/types";
 
 export const List = () => {
   const { id } = useParams();
@@ -18,7 +16,13 @@ export const List = () => {
     [id]
   );
   const Tasks = useLiveQuery(
-    () => (id ? db.Task.where("categoryId").equals(id!).toArray() : []),
+    () =>
+      id
+        ? db.Task.where("categoryId")
+            .equals(id!)
+            .and((item) => item.isDeleted == false)
+            .toArray()
+        : [],
     [id]
   );
 
@@ -30,7 +34,7 @@ export const List = () => {
         skeleton={<ListHeaderSkeleton />}
       />
       <SkeletonWrapper
-        component={<RenderTask tasks={Tasks!} />}
+        component={<RenderTask enableReorder={false} tasks={Tasks!} />}
         ready={!!Tasks}
         skeleton={<TasksRenderSkeleton />}
       />
