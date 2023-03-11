@@ -38,7 +38,7 @@ export const SideBar = () => {
         </div>
         <div className="border-b border-b-light  pb-6">
           <div className="flex items-center justify-between mt-5">
-            <span className="text-sm font-bold">Task app</span>
+            <span className="text-sm font-bold mx-3">Task app</span>
           </div>
           <NavLink className={className} to={"/search"}>
             <FiSearch className="text-tertiary" size={20} />

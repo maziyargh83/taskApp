@@ -1,5 +1,6 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import {
+  EmptyTask,
   ListHeader,
   ListHeaderSkeleton,
   SkeletonWrapper,
@@ -41,6 +42,8 @@ export const Trash = () => {
             tasks={Tasks!}
           />
         }
+        data={Tasks!}
+        empty={<EmptyTask />}
         ready={!!Tasks}
         skeleton={<TasksRenderSkeleton />}
       />

@@ -2,6 +2,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import {
+  EmptyTask,
   ListHeader,
   ListHeaderSkeleton,
   SkeletonWrapper,
@@ -9,9 +10,13 @@ import {
 } from "~/components";
 import { RenderTask } from "~/components/Task/RenderTask";
 import { db } from "~/core";
+import { STATUS } from "~/types";
 
 export const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchStatus, setSearchStatus] = useState<
+    keyof typeof STATUS | undefined
+  >();
   const Tasks = useLiveQuery(() => {
     const pattern = `${searchQuery}`;
     const regex = new RegExp(pattern);
@@ -47,6 +52,8 @@ export const Search = () => {
       <SkeletonWrapper
         component={<RenderTask enableReorder={false} tasks={Tasks!} />}
         ready={!!Tasks}
+        data={Tasks!}
+        empty={<EmptyTask />}
         skeleton={<TasksRenderSkeleton />}
       />
     </div>

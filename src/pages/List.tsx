@@ -1,6 +1,7 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { useParams } from "react-router-dom";
 import {
+  EmptyTask,
   ListHeader,
   ListHeaderSkeleton,
   SkeletonWrapper,
@@ -37,6 +38,8 @@ export const List = () => {
         component={<RenderTask enableReorder={false} tasks={Tasks!} />}
         ready={!!Tasks}
         skeleton={<TasksRenderSkeleton />}
+        data={Tasks!}
+        empty={<EmptyTask />}
       />
     </div>
   );

@@ -1,5 +1,6 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import {
+  EmptyTask,
   ListHeader,
   ListHeaderSkeleton,
   SkeletonWrapper,
@@ -34,6 +35,8 @@ export const Inbox = () => {
       <SkeletonWrapper
         component={<RenderTask enableReorder={false} tasks={Tasks!} />}
         ready={!!Tasks}
+        data={Tasks!}
+        empty={<EmptyTask />}
         skeleton={<TasksRenderSkeleton />}
       />
     </div>
