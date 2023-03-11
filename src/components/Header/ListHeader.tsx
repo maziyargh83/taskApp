@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { ContextMenu } from "~/components/ContextMenu/ContextMenu";
 import { Modal } from "~/components/Modal";
 import { CreateList } from "~/components/SideBar/ListModal";
+import { TaskModal } from "~/components/Task/TaskModal";
 import { updateList } from "~/core";
 import { capitalizeFirstLetter } from "~/helper/string";
 import { List } from "~/types";
@@ -12,6 +13,7 @@ interface ListHeaderProps {
 }
 export const ListHeader = ({ list }: ListHeaderProps) => {
   const [openModal, setOpenModal] = useState(false);
+  const [openTask, setOpenTask] = useState(false);
   const updateListData = async (data: Partial<List>) => {
     await updateList({ ...list, ...data });
     toast("succeed", {
@@ -35,10 +37,20 @@ export const ListHeader = ({ list }: ListHeaderProps) => {
         </Modal>
         <ContextMenu update={() => setOpenModal(true)} />
       </div>
-      <div className="flex space-x-3 items-center mt-10 cursor-pointer">
+      <div
+        onClick={() => setOpenTask(true)}
+        className="flex space-x-3 items-center mt-10 cursor-pointer"
+      >
         <span className="text-primary text-lg">+</span>
         <p className="text-tertiary  text-base">New Task</p>
       </div>
+      <Modal
+        className="bg-secondary w-[400px] "
+        close={() => setOpenTask(false)}
+        isOpen={openTask}
+      >
+        <TaskModal />
+      </Modal>
     </div>
   );
 };

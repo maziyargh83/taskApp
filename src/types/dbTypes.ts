@@ -1,4 +1,4 @@
-enum STATUS {
+export enum STATUS {
   "PENDING",
   "DONE",
 }

@@ -6,6 +6,7 @@ interface ModalProps {
   close: () => void;
   isOpen: boolean;
   className?: string;
+  fullScreen?: boolean;
 }
 ReactModal.setAppElement("#root");
 export const Modal = ({
@@ -13,17 +14,17 @@ export const Modal = ({
   isOpen,
   className,
   children,
+  fullScreen = false,
 }: PropsWithChildren<ModalProps>) => {
   return (
     <ReactModal
       isOpen={isOpen}
       overlayClassName={"fixed inset-0 bg-black/50"}
-      className={clsx(
-        "absolute inset-10 left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] rounded outline-none p-5",
-        {
-          [className!]: !!className,
-        }
-      )}
+      className={clsx("absolute inset-10 rounded outline-none p-5", {
+        [className!]: !!className,
+        "left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] ":
+          !fullScreen,
+      })}
       onRequestClose={close}
     >
       <div

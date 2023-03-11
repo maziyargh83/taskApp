@@ -46,14 +46,12 @@ export const applyTheme = (theme: keyof typeof ThemeType): void => {
     const data = JSON.parse(res);
     if (data.theme === theme) {
       applyStyle(data.pallet);
-      console.log("data was generated");
 
       return;
     }
   }
   const themeObject = mapTheme(themes[theme]);
   if (!themeObject) return;
-  console.log("data re generated");
 
   applyStyle(themeObject);
   const data = {
