@@ -8,6 +8,7 @@ import { CreateList } from "~/components/SideBar/ListModal";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
 import { useLiveQuery } from "dexie-react-hooks";
+import { SkeletonWrapper, TasksRenderSkeleton } from "~/components/Skelton";
 export const List = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const listData = useLiveQuery(() => db.List.toArray());
@@ -25,13 +26,18 @@ export const List = () => {
       });
     }
   };
-
+  const RenderData = listData?.map((item) => (
+    <ListItem key={item.objectId} {...item} />
+  ));
   return (
     <Fragment>
-      <DropMenu title="List">
-        {listData?.map((item) => (
-          <ListItem key={item.objectId} {...item} />
-        ))}
+      <DropMenu title="List" defaultOpen>
+        <SkeletonWrapper
+          component={RenderData}
+          ready={!!listData}
+          skeleton={<TasksRenderSkeleton />}
+        />
+
         <ListItem
           emoji="+"
           create={() => setOpenModal(true)}
