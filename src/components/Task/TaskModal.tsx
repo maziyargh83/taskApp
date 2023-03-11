@@ -1,14 +1,19 @@
 import clsx from "clsx";
 import { useState } from "react";
 import { FiStar } from "react-icons/fi";
+import { toast } from "react-toastify";
 import { Button } from "~/components/Button";
 import { ImagePicker } from "~/components/ImagePicker";
 import { Status } from "~/components/Status/Status";
-import { STATUS } from "~/types";
-
-export const TaskModal = () => {
+import { STATUS, Task } from "~/types";
+interface TaskModalProps {
+  save: (item: Partial<Task>) => void;
+}
+export const TaskModal = ({ save }: TaskModalProps) => {
   const [status, setStatus] = useState<keyof typeof STATUS>("PENDING");
-  const [image, setImage] = useState<ArrayBuffer | string | null>();
+  const [image, setImage] = useState<ArrayBuffer | string | null | undefined>(
+    undefined
+  );
   const [favorite, setFavorite] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const changeStatus = () => {
@@ -16,6 +21,20 @@ export const TaskModal = () => {
       setStatus("DONE");
     } else {
       setStatus("PENDING");
+    }
+  };
+  const saveTask = () => {
+    if (title.length >= 3) {
+      save({
+        title,
+        image,
+        favorite,
+        status,
+      });
+    } else {
+      toast("title should at least 3 characters", {
+        type: "error",
+      });
     }
   };
   return (
@@ -51,6 +70,7 @@ export const TaskModal = () => {
         <Button
           className="w-full border-primary hover:bg-primary"
           theme="primary"
+          onClick={saveTask}
         >
           save
         </Button>

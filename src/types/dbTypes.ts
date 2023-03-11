@@ -7,10 +7,11 @@ export class Task {
     public objectId: string,
     public title: string,
     public categoryId: string,
-    public subCategoryId: string,
     public status: keyof typeof STATUS,
+    public favorite: boolean,
     public createDate: Date,
-    public isDeleted: boolean
+    public isDeleted: boolean,
+    public image?: ArrayBuffer | string | null
   ) {}
 }
 export class List {

@@ -9,7 +9,7 @@ export class TaskDB extends Dexie {
   constructor() {
     super("myDatabase");
     this.version(1).stores({
-      Task: "objectId, title, categoryId, subCategoryId, status, createDate, isDeleted",
+      Task: "objectId, title, categoryId, status, createDate, isDeleted, favorite, image",
       List: "objectId, title, emoji, createDate, isDeleted",
       Label: "objectId, title, ListId, createDate, isDeleted",
     });

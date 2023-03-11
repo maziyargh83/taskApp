@@ -4,9 +4,9 @@ import { ContextMenu } from "~/components/ContextMenu/ContextMenu";
 import { Modal } from "~/components/Modal";
 import { CreateList } from "~/components/SideBar/ListModal";
 import { TaskModal } from "~/components/Task/TaskModal";
-import { updateList } from "~/core";
+import { addTask, updateList } from "~/core";
 import { capitalizeFirstLetter } from "~/helper/string";
-import { List } from "~/types";
+import { List, Task } from "~/types";
 
 interface ListHeaderProps {
   list: List;
@@ -20,6 +20,24 @@ export const ListHeader = ({ list }: ListHeaderProps) => {
       type: "success",
     });
     setOpenModal(false);
+  };
+  const saveTask = async ({
+    title,
+    favorite,
+    status,
+    image,
+  }: Partial<Task>) => {
+    await addTask({
+      title,
+      categoryId: list.objectId,
+      favorite,
+      status,
+      image,
+    });
+    toast("succeed", {
+      type: "success",
+    });
+    setOpenTask(false);
   };
   return (
     <div className="">
@@ -45,11 +63,11 @@ export const ListHeader = ({ list }: ListHeaderProps) => {
         <p className="text-tertiary  text-base">New Task</p>
       </div>
       <Modal
-        className="bg-secondary w-[400px] "
+        className="bg-secondary w-[400px]"
         close={() => setOpenTask(false)}
         isOpen={openTask}
       >
-        <TaskModal />
+        <TaskModal save={saveTask} />
       </Modal>
     </div>
   );
