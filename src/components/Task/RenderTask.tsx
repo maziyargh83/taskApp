@@ -5,7 +5,7 @@ import * as Checkbox from "@radix-ui/react-checkbox";
 import { FiCheck, FiImage, FiStar } from "react-icons/fi";
 import { updateMany, updateTask } from "~/core";
 import { toast } from "react-toastify";
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { RxDragHandleDots2 } from "react-icons/rx";
 import { ContextMenu } from "~/components/ContextMenu";
 import { Modal } from "~/components/Modal";
@@ -72,6 +72,27 @@ export const Task = ({ task }: TaskProps) => {
     setShowEdit(false);
   };
   const dragControls = useDragControls();
+  const iRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const touchHandler: React.TouchEventHandler<HTMLElement> = (e) =>
+      e.preventDefault();
+
+    const iTag = iRef.current;
+
+    if (iTag) {
+      //@ts-ignore
+      iTag.addEventListener("touchstart", touchHandler, { passive: false });
+
+      return () => {
+        //@ts-ignore
+        iTag.removeEventListener("touchstart", touchHandler, {
+          passive: false,
+        });
+      };
+    }
+    return;
+  }, [iRef]);
   return (
     <Fragment>
       <Modal
@@ -82,6 +103,7 @@ export const Task = ({ task }: TaskProps) => {
         <TaskModal task={task} save={update} />
       </Modal>
       <Reorder.Item
+        ref={iRef}
         value={task}
         id={task.objectId}
         dragListener={false}
@@ -131,12 +153,13 @@ export const Task = ({ task }: TaskProps) => {
         {task.image && <FiImage className="text-reverse" size={20} />}
 
         <div className="flex-1" />
-        <FiStar
-          onClick={toggleFavorite}
-          className={clsx("mx-4 text-yellow-400 ", {
-            "fill-yellow-400": task.favorite,
-          })}
-        />
+        <div onClick={toggleFavorite} className="cursor-pointer">
+          <FiStar
+            className={clsx("mx-4 text-yellow-400 ", {
+              "fill-yellow-400": task.favorite,
+            })}
+          />
+        </div>
         <ContextMenu update={() => setShowEdit(true)} />
       </Reorder.Item>
     </Fragment>
