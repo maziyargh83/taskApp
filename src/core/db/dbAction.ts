@@ -12,3 +12,12 @@ export const getLists = async (): Promise<List[]> => {
 export const getList = async (id: string) => {
   return await db.List.get(id);
 };
+export const updateList = async (data: List) => {
+  return await db.List.where("objectId")
+    .equals(data.objectId)
+    .modify((item) => {
+      item.emoji = data.emoji;
+      item.title = data.title;
+      item.isDeleted = data.isDeleted;
+    });
+};

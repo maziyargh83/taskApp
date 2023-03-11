@@ -1,24 +1,21 @@
 import { Fragment, useEffect, useState } from "react";
 import { DropMenu } from "~/components/DropMenu";
-import { createList, getLists } from "~/core";
+import { createList, db, getLists } from "~/core";
 import { List as ListType } from "~/types";
 import { clsx } from "clsx";
 import { Modal } from "~/components/Modal";
 import { CreateList } from "~/components/SideBar/ListModal";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
+import { useLiveQuery } from "dexie-react-hooks";
 export const List = () => {
-  const [listData, setListData] = useState<ListType[]>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const getData = async () => {
-    const data = await getLists();
-    setListData(data);
-  };
+  const listData = useLiveQuery(() => db.List.toArray());
+
   const addList = async (data: Partial<ListType>) => {
     try {
       await createList(data);
       setOpenModal(false);
-      getData();
       toast("Succeed", {
         type: "success",
       });
@@ -28,9 +25,7 @@ export const List = () => {
       });
     }
   };
-  useEffect(() => {
-    getData();
-  }, []);
+
   return (
     <Fragment>
       <DropMenu title="List">

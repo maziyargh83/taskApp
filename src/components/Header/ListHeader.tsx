@@ -1,4 +1,9 @@
-import { FiMoreHorizontal } from "react-icons/fi";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { ContextMenu } from "~/components/ContextMenu/ContextMenu";
+import { Modal } from "~/components/Modal";
+import { CreateList } from "~/components/SideBar/ListModal";
+import { updateList } from "~/core";
 import { capitalizeFirstLetter } from "~/helper/string";
 import { List } from "~/types";
 
@@ -6,6 +11,14 @@ interface ListHeaderProps {
   list: List;
 }
 export const ListHeader = ({ list }: ListHeaderProps) => {
+  const [openModal, setOpenModal] = useState(false);
+  const updateListData = async (data: Partial<List>) => {
+    await updateList({ ...list, ...data });
+    toast("succeed", {
+      type: "success",
+    });
+    setOpenModal(false);
+  };
   return (
     <div className="">
       <p className="text-6xl">{list.emoji}</p>
@@ -13,7 +26,18 @@ export const ListHeader = ({ list }: ListHeaderProps) => {
         <p className="text-reverse font-bold text-xl">
           {capitalizeFirstLetter(list.title)}
         </p>
-        <FiMoreHorizontal className="text-primary" size={20} />
+        <Modal
+          className="bg-secondary w-[400px] h-48"
+          close={() => setOpenModal(false)}
+          isOpen={openModal}
+        >
+          <CreateList addList={updateListData} list={list} type="update" />
+        </Modal>
+        <ContextMenu update={() => setOpenModal(true)} />
+      </div>
+      <div className="flex space-x-3 items-center mt-10 cursor-pointer">
+        <span className="text-primary text-lg">+</span>
+        <p className="text-tertiary  text-base">New Task</p>
       </div>
     </div>
   );

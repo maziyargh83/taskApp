@@ -7,10 +7,11 @@ import { List } from "~/types";
 interface CreateList {
   type: "update" | "create";
   addList: (list: Partial<List>) => void;
+  list?: List;
 }
-export const CreateList = ({ type, addList }: CreateList) => {
-  const [emojiData, setEmojiData] = useState("👀");
-  const [titleData, setTitleData] = useState("");
+export const CreateList = ({ type, addList, list }: CreateList) => {
+  const [emojiData, setEmojiData] = useState(list?.emoji ?? "👀");
+  const [titleData, setTitleData] = useState(list?.title ?? "");
   const [showPicker, setShowPicker] = useState<boolean>(false);
   const save = () => {
     if (titleData.length >= 3) {
@@ -56,7 +57,9 @@ export const CreateList = ({ type, addList }: CreateList) => {
         </div>
       </div>
       <div className="mt-10 flex">
-        <Button onClick={save}>Create List</Button>
+        <Button onClick={save}>
+          {type === "create" ? "Create List" : "Update List"}
+        </Button>
       </div>
     </div>
   );
