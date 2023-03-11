@@ -41,7 +41,7 @@ export const SideBar = () => {
             <span className="text-sm font-bold">Task app</span>
           </div>
           <NavLink className={className} to={"/search"}>
-            <FiSearch className="text-light" size={20} />
+            <FiSearch className="text-tertiary" size={20} />
             <span className="text-sm">Quick find</span>
           </NavLink>
           <NavLink className={className} to={"/favorite"}>

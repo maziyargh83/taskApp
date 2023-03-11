@@ -32,7 +32,7 @@ export const Inbox = () => {
         skeleton={<ListHeaderSkeleton />}
       />
       <SkeletonWrapper
-        component={<RenderTask tasks={Tasks!} />}
+        component={<RenderTask enableReorder={false} tasks={Tasks!} />}
         ready={!!Tasks}
         skeleton={<TasksRenderSkeleton />}
       />

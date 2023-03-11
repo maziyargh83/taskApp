@@ -1,5 +1,6 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { useState } from "react";
+import { FiSearch } from "react-icons/fi";
 import {
   ListHeader,
   ListHeaderSkeleton,
@@ -34,11 +35,17 @@ export const Search = () => {
         ready={true}
         skeleton={<ListHeaderSkeleton />}
       />
-      <div>
-        <input type="text" onChange={(e) => setSearchQuery(e.target.value)} />
+      <div className="flex items-center border rounded-md mt-10 p-2">
+        <input
+          className="flex-1 bg-transparent outline-none text-tertiary"
+          placeholder="Enter Search KeyWord"
+          type="text"
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <FiSearch className="text-tertiary mx-3" size={20} />
       </div>
       <SkeletonWrapper
-        component={<RenderTask tasks={Tasks!} />}
+        component={<RenderTask enableReorder={false} tasks={Tasks!} />}
         ready={!!Tasks}
         skeleton={<TasksRenderSkeleton />}
       />

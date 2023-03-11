@@ -43,9 +43,9 @@ export const RenderTask = ({
     const task = data.map((res, index) => ({ ...res, order: index + 1 }));
     updateMany(task);
   };
-  const ReorderEl = ({ children }: PropsWithChildren) => {
-    if (!enableReorder) return <Fragment>{children}</Fragment>;
-    return (
+
+  return (
+    <div className="mt-10">
       <Reorder.Group
         axis="y"
         onReorder={(e) => {
@@ -53,13 +53,6 @@ export const RenderTask = ({
         }}
         values={tasks}
       >
-        {children}
-      </Reorder.Group>
-    );
-  };
-  return (
-    <div className="mt-10">
-      <ReorderEl>
         {tasks
           .sort((a, b) => a.order - b.order)
           .map((data) => {
@@ -74,7 +67,7 @@ export const RenderTask = ({
               />
             );
           })}
-      </ReorderEl>
+      </Reorder.Group>
     </div>
   );
 };
@@ -146,18 +139,16 @@ export const Task = ({
     }
     return;
   }, [iRef]);
-  const ReorderEl = ({ children }: PropsWithChildren) => {
-    if (!enableReorder)
-      return (
-        <div
-          className={clsx("flex items-center rounded py-1 px-2 mt-2 bg-body", {
-            "bg-light": checked,
-          })}
-        >
-          {children}
-        </div>
-      );
-    return (
+
+  return (
+    <Fragment>
+      <Modal
+        className="bg-secondary w-[400px]"
+        close={() => setShowEdit(false)}
+        isOpen={showEdit}
+      >
+        <TaskModal task={task} save={update} />
+      </Modal>
       <Reorder.Item
         ref={iRef}
         value={task}
@@ -168,25 +159,13 @@ export const Task = ({
           "bg-light": checked,
         })}
       >
-        <RxDragHandleDots2
-          onPointerDown={(event) => dragControls.start(event)}
-          size={20}
-          className="text-primary mr-3"
-        />
-        {children}
-      </Reorder.Item>
-    );
-  };
-  return (
-    <Fragment>
-      <Modal
-        className="bg-secondary w-[400px]"
-        close={() => setShowEdit(false)}
-        isOpen={showEdit}
-      >
-        <TaskModal task={task} save={update} />
-      </Modal>
-      <ReorderEl>
+        {enableReorder && (
+          <RxDragHandleDots2
+            onPointerDown={(event) => dragControls.start(event)}
+            size={20}
+            className="text-primary mr-3"
+          />
+        )}
         {enableStatus && (
           <Checkbox.Root
             className={clsx(
@@ -195,7 +174,7 @@ export const Task = ({
                 "bg-primary": checked,
               }
             )}
-            onCheckedChange={(isChecked) => updateCheck(isChecked)}
+            onCheckedChange={(isChecked) => updateCheck(isChecked as boolean)}
             defaultChecked={checked}
             checked={checked}
           >
@@ -242,7 +221,7 @@ export const Task = ({
             update={() => setShowEdit(true)}
           />
         )}
-      </ReorderEl>
+      </Reorder.Item>
     </Fragment>
   );
 };
