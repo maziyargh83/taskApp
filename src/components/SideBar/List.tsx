@@ -66,6 +66,14 @@ const ListItem = ({
   titleClassName,
   create,
 }: Partial<ListType> & ListItemProps) => {
+  const count = useLiveQuery(() =>
+    objectId
+      ? db.Task.where("categoryId")
+          .equals(objectId)
+          .and((item) => !item.isDeleted)
+          .count()
+      : 0
+  );
   return (
     <NavLink
       to={"/list/" + objectId}
@@ -89,6 +97,8 @@ const ListItem = ({
         {emoji}
       </span>
       <p>{title}</p>
+      <div className="flex-1" />
+      {count > 0 && <span>{count}</span>}
     </NavLink>
   );
 };
