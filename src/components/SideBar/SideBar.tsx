@@ -13,7 +13,6 @@ export const SideBar = () => {
   const [isOpen, setIsOpen] = useState(true);
   const closeModal = () => {
     setIsOpen((prev) => !prev);
-    console.log(isOpen);
   };
   const className = ({ isActive }: { isActive: boolean }) =>
     clsx("flex items-center space-x-3 mt-5 mx-2 px-1 py-2 rounded", {

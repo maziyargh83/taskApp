@@ -50,7 +50,6 @@ export const applyTheme = (theme?: keyof typeof ThemeType): void => {
   }
 
   if (!theme) theme = CONFIG.baseTheme;
-  console.log(theme);
 
   const themeObject = mapTheme(themes[theme]);
   if (!themeObject) return;

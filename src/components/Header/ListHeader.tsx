@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ContextMenu } from "~/components/ContextMenu/ContextMenu";
 import { Modal } from "~/components/Modal";
+import { ListRemoveModal } from "~/components/SideBar";
 import { CreateList } from "~/components/SideBar/ListModal";
 import { TaskModal } from "~/components/Task/TaskModal";
-import { addTask, updateList } from "~/core";
+import { addTask, removeTaskAndList, updateList } from "~/core";
 import { capitalizeFirstLetter } from "~/helper/string";
 import { List, Task } from "~/types";
 
@@ -14,7 +16,13 @@ interface ListHeaderProps {
 }
 export const ListHeader = ({ list, view = false }: ListHeaderProps) => {
   const [openModal, setOpenModal] = useState(false);
+  const [removeModal, setRemoveModal] = useState(false);
   const [openTask, setOpenTask] = useState(false);
+  const nav = useNavigate();
+  const remove = async () => {
+    await removeTaskAndList(list.objectId);
+    nav("/inbox");
+  };
   const updateListData = async (data: Partial<List>) => {
     await updateList({ ...list, ...data });
     toast("succeed", {
@@ -54,7 +62,12 @@ export const ListHeader = ({ list, view = false }: ListHeaderProps) => {
         >
           <CreateList addList={updateListData} list={list} type="update" />
         </Modal>
-        {!view && <ContextMenu update={() => setOpenModal(true)} />}
+        {!view && (
+          <ContextMenu
+            deleteItem={() => setRemoveModal(true)}
+            update={() => setOpenModal(true)}
+          />
+        )}
       </div>
       {!view && (
         <div
@@ -71,6 +84,19 @@ export const ListHeader = ({ list, view = false }: ListHeaderProps) => {
         isOpen={openTask}
       >
         <TaskModal save={saveTask} />
+      </Modal>
+      <Modal
+        className="bg-secondary w-[200px] h-[150px]"
+        close={() => setRemoveModal(false)}
+        isOpen={removeModal}
+      >
+        <ListRemoveModal
+          id={list.objectId}
+          cancel={() => {
+            setRemoveModal(false);
+          }}
+          ok={remove}
+        />
       </Modal>
     </div>
   );

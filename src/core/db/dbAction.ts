@@ -55,3 +55,7 @@ export const addTask = async ({
     )
   );
 };
+export const removeTaskAndList = async (categoryId: string) => {
+  await db.Task.where("categoryId").equals(categoryId).delete();
+  await db.List.where("objectId").equals(categoryId).delete();
+};

@@ -13,7 +13,6 @@ export const Favorite = () => {
   const Tasks = useLiveQuery(() =>
     db.Task.filter((t) => t.favorite && !t.isDeleted).toArray()
   );
-  console.log(Tasks);
 
   return (
     <div className="px-12 py-6">

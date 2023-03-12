@@ -18,6 +18,7 @@ import { ContextMenu } from "~/components/ContextMenu";
 import { Modal } from "~/components/Modal";
 import { TaskModal } from "~/components/Task/TaskModal";
 import { Reorder, useDragControls } from "framer-motion";
+import { ImageModal } from "~/components/Modal/ImageModal";
 interface RenderTaskProps {
   tasks: TaskType[];
   enableReorder?: boolean;
@@ -78,10 +79,11 @@ export const Task = ({
   enableStar = true,
   enableRecover = false,
 }: TaskProps) => {
+  const [showEdit, setShowEdit] = useState(false);
+  const [openImage, setOpenImage] = useState(false);
   const date = useMemo(() => {
     return convertDateToRelative(task.createDate);
   }, [task.createDate]);
-  const [showEdit, setShowEdit] = useState(false);
   const checked = useMemo(() => {
     return task.status === "DONE";
   }, [task]);
@@ -149,6 +151,13 @@ export const Task = ({
       >
         <TaskModal task={task} save={update} />
       </Modal>
+      <Modal
+        className="bg-secondary w-[400px] h-[200px]"
+        close={() => setOpenImage(false)}
+        isOpen={openImage}
+      >
+        <ImageModal img={task.image!} />
+      </Modal>
       <Reorder.Item
         ref={iRef}
         value={task}
@@ -201,7 +210,13 @@ export const Task = ({
             {date}
           </span>
         </div>
-        {task.image && <FiImage className="text-reverse" size={20} />}
+        {task.image && (
+          <FiImage
+            onClick={() => setOpenImage(true)}
+            className="text-reverse"
+            size={20}
+          />
+        )}
 
         <div className="flex-1" />
         {enableStar && (
