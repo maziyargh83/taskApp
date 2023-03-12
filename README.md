@@ -2,7 +2,8 @@
 
 This is a minimalist ToDo app built using React and IndexDB for offline storage, with Tailwind for styling. It features a dark mode toggle, allows users to add, edit, and delete tasks, and also includes the ability to reorder tasks and text filters.
 
-![ToDo App Preview](https://media.giphy.com/media/gQbu1bOLd4v6sZBCW8/giphy.gif)
+![ToDo App Preview](https://media.giphy.com/media/dUUim1vc3d3MNS6vF5/giphy.gif)
+![ToDo App Preview](https://media.giphy.com/media/yVC8MohNrPNUt1BZDq/giphy.gif)
 
 ## Features
 

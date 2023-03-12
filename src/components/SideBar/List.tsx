@@ -46,7 +46,7 @@ export const List = () => {
         />
       </DropMenu>
       <Modal
-        className="bg-secondary w-[400px] h-48"
+        className="bg-secondary w-[90%] md:w-[400px] h-48"
         close={() => setOpenModal(false)}
         isOpen={openModal}
       >

@@ -56,7 +56,7 @@ export const ListHeader = ({ list, view = false }: ListHeaderProps) => {
           {capitalizeFirstLetter(list.title)}
         </p>
         <Modal
-          className="bg-secondary w-[400px] h-48"
+          className="bg-secondary md:w-[400px] w-[90%] h-48"
           close={() => setOpenModal(false)}
           isOpen={openModal}
         >
@@ -79,14 +79,14 @@ export const ListHeader = ({ list, view = false }: ListHeaderProps) => {
         </div>
       )}
       <Modal
-        className="bg-secondary w-[400px]"
+        className="bg-secondary md:w-[400px] w-[90%]"
         close={() => setOpenTask(false)}
         isOpen={openTask}
       >
         <TaskModal save={saveTask} />
       </Modal>
       <Modal
-        className="bg-secondary w-[200px] h-[150px]"
+        className="bg-secondary md:w-[200px] w-[90%] h-[150px]"
         close={() => setRemoveModal(false)}
         isOpen={removeModal}
       >

@@ -145,14 +145,14 @@ export const Task = ({
   return (
     <Fragment>
       <Modal
-        className="bg-secondary w-[400px]"
+        className="bg-secondary w-[90%] md:w-[400px]"
         close={() => setShowEdit(false)}
         isOpen={showEdit}
       >
         <TaskModal task={task} save={update} />
       </Modal>
       <Modal
-        className="bg-secondary w-[400px] h-[200px]"
+        className="bg-secondary w-[90%] md:w-[400px] h-[200px]"
         close={() => setOpenImage(false)}
         isOpen={openImage}
       >
