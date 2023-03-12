@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { DropMenu } from "~/components/DropMenu";
-import { createList, db, getLists } from "~/core";
+import { createList, db } from "~/core";
 import { List as ListType } from "~/types";
 import { clsx } from "clsx";
 import { Modal } from "~/components/Modal";
