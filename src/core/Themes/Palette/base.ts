@@ -1,10 +1,10 @@
 import type { themeRecord } from "~/core/Themes/types/types";
 
 export const baseTheme: themeRecord = {
-  primary: "#4B81ED",
+  primary: "#1E63ED",
   secondary: "#F9F9F9",
-  tertiary: "#5B5A5D",
+  tertiary: "#434345",
   body: "#FFFFFF",
-  light: "#434245",
+  light: "#F7F7F7",
   reverse: "#000",
 };

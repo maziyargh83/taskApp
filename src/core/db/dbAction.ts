@@ -39,7 +39,8 @@ export const addTask = async ({
   order,
 }: Partial<Task>) => {
   if (!title || !categoryId || !status) return;
-  const _order = order || (await db.Task.count()) + 1;
+  const _order =
+    order || (await db.Task.where("categoryId").equals(categoryId).count()) + 1;
   await db.Task.add(
     new Task(
       v4(),

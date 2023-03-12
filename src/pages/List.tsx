@@ -35,7 +35,7 @@ export const List = () => {
         skeleton={<ListHeaderSkeleton />}
       />
       <SkeletonWrapper
-        component={<RenderTask enableReorder={false} tasks={Tasks!} />}
+        component={<RenderTask tasks={Tasks!} />}
         ready={!!Tasks}
         skeleton={<TasksRenderSkeleton />}
         data={Tasks!}

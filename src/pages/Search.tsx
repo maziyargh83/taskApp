@@ -14,12 +14,10 @@ import { STATUS } from "~/types";
 
 export const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchStatus, setSearchStatus] = useState<
-    keyof typeof STATUS | undefined
-  >();
+
   const Tasks = useLiveQuery(() => {
     const pattern = `${searchQuery}`;
-    const regex = new RegExp(pattern);
+    const regex = new RegExp(pattern, "i"); // use 'i' flag to make the search case-insensitive
     return db.Task.filter((item) => regex.test(item.title)).toArray();
   }, [searchQuery]);
 

@@ -40,16 +40,18 @@ export const insertLetter = (str: string, letter: string, index: number) => {
 };
 export const findUpperCaseLetter = (str: string) =>
   str.split("").findIndex((item) => item.toUpperCase() === item);
-export const applyTheme = (theme: keyof typeof ThemeType): void => {
+export const applyTheme = (theme?: keyof typeof ThemeType): void => {
   const res = localStorage.getItem("theme");
-  if (res) {
+  if (res && !theme) {
     const data = JSON.parse(res);
-    if (data.theme === theme) {
-      applyStyle(data.pallet);
+    applyStyle(data.pallet);
 
-      return;
-    }
+    return;
   }
+
+  if (!theme) theme = CONFIG.baseTheme;
+  console.log(theme);
+
   const themeObject = mapTheme(themes[theme]);
   if (!themeObject) return;
 

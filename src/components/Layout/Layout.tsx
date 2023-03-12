@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify";
-import { SideBar, Main } from "~/components";
+import { SideBar, Main, Header } from "~/components";
 import { getTheme } from "~/core/Themes/Utils/utils";
 
 export const Layout = () => {

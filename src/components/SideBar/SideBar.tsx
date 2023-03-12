@@ -23,7 +23,7 @@ export const SideBar = () => {
     <Fragment>
       <aside
         className={clsx(
-          "fixed h-screen bg-secondary border-r-light border-r w-[200px] text-tertiary flex flex-col",
+          "fixed h-screen z-50 bg-secondary border-r-light border-r w-[200px] text-tertiary flex flex-col",
           {
             "-left-[200px]": !isOpen,
             "left-0 ": isOpen,

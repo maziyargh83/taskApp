@@ -28,7 +28,7 @@ export function useThemeState() {
   return context;
 }
 export function useThemeDispatch() {
-  const dispatch = useContext(SelectedThemeState);
+  const dispatch = useContext(SelectedThemeSetState);
   if (dispatch === undefined) {
     throw new Error("render <ThemeProvider /> at top of the tree");
   }

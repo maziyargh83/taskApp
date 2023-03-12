@@ -178,7 +178,7 @@ export const Task = ({
             defaultChecked={checked}
             checked={checked}
           >
-            <Checkbox.Indicator className="text-white">
+            <Checkbox.Indicator className="text-reverse">
               <FiCheck size={20} />
             </Checkbox.Indicator>
           </Checkbox.Root>

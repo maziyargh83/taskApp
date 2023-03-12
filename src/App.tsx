@@ -1,9 +1,15 @@
-import { applyStyle, getTheme } from "~/core/Themes/Utils/utils";
+import { CONFIG } from "~/Config";
+import { applyStyle, applyTheme, getTheme } from "~/core/Themes/Utils/utils";
+import ThemeProvider from "~/provider/Theme/themeProvider";
 import { Router } from "~/router";
 function App() {
-  applyStyle(getTheme());
+  applyTheme();
 
-  return <Router />;
+  return (
+    <ThemeProvider>
+      <Router />
+    </ThemeProvider>
+  );
 }
 
 export default App;

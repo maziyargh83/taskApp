@@ -24,12 +24,3 @@ export class List {
     public isDeleted: boolean
   ) {}
 }
-export class Label {
-  constructor(
-    public objectId: string,
-    public title: string,
-    public ListId: string,
-    public createDate: Date,
-    public isDeleted: boolean
-  ) {}
-}
