@@ -98,7 +98,7 @@ const ListItem = ({
       </span>
       <p>{title}</p>
       <div className="flex-1" />
-      {count! > 0 && <span>{count}</span>}
+      {count! > 0 && <span className="text-xs font-bold">{count}</span>}
     </NavLink>
   );
 };
