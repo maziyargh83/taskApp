@@ -7,6 +7,8 @@ interface ImagePickerProps {
 }
 export const ImagePicker = ({ save, image }: ImagePickerProps) => {
   const handleDrop = (acceptedFiles: File[]) => {
+    console.log(acceptedFiles);
+
     const reader = new FileReader();
     reader.readAsDataURL(acceptedFiles[0]);
     reader.onload = () => {
@@ -58,7 +60,7 @@ export const RenderImage = ({ acceptedFiles, imageData }: RenderImageProps) => {
     };
   };
   useEffect(() => {
-    if (!imageData) getData();
+    if (acceptedFiles) getData();
   }, [acceptedFiles]);
   return (
     <img className="object-contain w-full h-full" src={data as string} alt="" />
